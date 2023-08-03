@@ -15,9 +15,21 @@ class App extends Component {
   };
 
   addContact = contact => {
+    const isExist = this.isContactExist(contact.name);
+    if (isExist) {
+      alert(`${contact.name} is already in contacts`);
+      return;
+    }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
+  };
+
+  isContactExist = name => {
+    return this.state.contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
   };
 
   handleFilterChange = event => {
